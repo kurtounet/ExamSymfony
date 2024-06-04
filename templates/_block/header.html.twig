@@ -1,0 +1,25 @@
+<header class="bg-gray-800 p-4 text-white flex justify-between items-center">
+	<div class="text-lg font-bold">Nom de la Boutique</div>
+	<nav>
+		<ul class="flex gap-4">
+			<li>
+				<a href="{{ path('app_index') }}" class="hover:text-gray-300">Accueil</a>
+			</li>
+			<li>
+				<a href="{{ path('app_categories') }}" class="hover:text-gray-300">Produits</a>
+			</li>
+			<li>
+				<a href="{{ path('app_about') }}" class="hover:text-gray-300">À propos</a>
+			</li>
+			<li>
+				<a href="{{ path('app_contact') }}" class="hover:text-gray-300">Contact</a>
+			</li>
+		</ul>
+	</nav>
+	<div>
+		<a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ path('app_login') }}">
+
+			Se connecter
+		</a>
+	</div>
+</header>
