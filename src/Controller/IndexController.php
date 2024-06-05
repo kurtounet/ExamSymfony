@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Character;
+use App\Repository\CharacterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,30 +13,30 @@ class IndexController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(): Response
     {
-        return $this->render('index/index.html.twig', [
-            'controller_name' => 'IndexController',
-        ]);
+        return $this->render('home/index.html.twig');
+
     }
     //Controller de la page categories
-    #[Route('/categories', name: 'app_categories')]
-    public function category(): Response
+    #[Route('/heros', name: 'app_heros')]
+    public function heros(CharacterRepository $characterRepository): Response
     {
-        return $this->render('categories/categories.html.twig', [
-            'controller_name' => 'IndexController',
+        $characters = $characterRepository->findAll();
+        return $this->render('heros/listheros.html.twig', [
+            'heros' => $characters,
         ]);
     }
     #[Route('/contact', name: 'app_contact')]
     public function contact(): Response
     {
         return $this->render('contact/contact.html.twig', [
-            'controller_name' => 'IndexController',
+            'controller_name' => 'ContactController',
         ]);
     }
     #[Route('/about', name: 'app_about')]
     public function about(): Response
     {
         return $this->render('about/about.html.twig', [
-            'controller_name' => 'IndexController',
+            'controller_name' => 'AboutController',
         ]);
     }
 

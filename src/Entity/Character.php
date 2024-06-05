@@ -15,7 +15,7 @@ class Character
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 50)]
     private ?string $name = null;
 
     #[ORM\Column(length: 15)]
@@ -37,12 +37,12 @@ class Character
     private ?string $affiliation = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $deletedAt = null;
+    private ?string $deletedAt = null;
 
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $gender = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    #[ORM\Column(type: Types::ARRAY , nullable: true)]
     private ?array $transformation = null;
 
     #[ORM\ManyToOne(inversedBy: 'characters')]
@@ -137,12 +137,12 @@ class Character
         return $this;
     }
 
-    public function getDeletedAt(): ?\DateTimeImmutable
+    public function getDeletedAt(): ?string
     {
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(\DateTimeImmutable $deletedAt): static
+    public function setDeletedAt(string $deletedAt): static
     {
         $this->deletedAt = $deletedAt;
 

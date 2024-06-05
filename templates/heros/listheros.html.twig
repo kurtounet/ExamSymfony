@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!
+{% endblock %}
+
+{% block body %}
+	<ul>
+		{% for hero in heros %}
+			<li>
+            
+				{{ hero.name }}
+				{{ chero.articles }}
+			</li>
+		{% else %}
+			<li>Aucune catégorie trouvée</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}

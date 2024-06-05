@@ -43,20 +43,29 @@ class CallApiCommand extends Command
     {
 
         $io = new SymfonyStyle($input, $output);
-
         $callApiService = new CallApiService($this->httpClient);
+
+        $pathDirFixtures = __DIR__ . '/../DataFixtures//';
+        /*
         // Appel API Planet
-        for ($i = 1; $i < 2; $i++) {
+        $JSON = "";
+        for ($i = 1; $i <= 2; $i++) {
             $data = $callApiService->getPlanetData($i);
-            echo json_encode($data, true);
+            $JSON .= json_encode($data, true);
         }
+        file_put_contents($pathDirFixtures . 'planets.json', $JSON);
+
+        */
         // Appel API character
+        $JSON = "";
         for ($i = 1; $i < 58; $i++) {
             $data = $callApiService->getCharacterData($i);
-            echo json_encode($data, true);
-            echo "character " . $i . " \n";
+            if (!$data === false) {
+                $JSON .= json_encode($data, true) . ",";
+            }
+            //echo "character " . $i . " \n";
         }
-
+        file_put_contents($pathDirFixtures . 'characters.json', $JSON);
         // $io->success($callApiService);
         /*
         $arg1 = $input->getArgument('arg1');

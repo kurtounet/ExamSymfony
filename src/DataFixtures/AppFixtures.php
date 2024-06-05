@@ -41,36 +41,39 @@ class AppFixtures extends Fixture
 
     }
     public function load(ObjectManager $manager): void
-    {
-        $data = $this->loadData('planet.json');
+    { /*
+$data = $this->loadData('planet.json');
 
-        foreach ($data as $value) {
-            $planet = new Planet();
-            $planet->setName($value['name']);
-            $planet->setDestroyed($value['isDestroyed']);
-            $planet->setDescription($value['description']);
-            $planet->setImage($value['image']);
-            $planet->setDeletedAt($value['deletedAt']);
-            $manager->persist($planet);
-        }
+foreach ($data as $value) {
 
-        $manager->flush();
+    $planet = new Planet();
+    $planet->setName($value['name']);
+    $planet->setDestroyed($value['isDestroyed']);
+    $planet->setDescription($value['description']);
+    $planet->setImage($value['image']);
+    $planet->setDeletedAt($value['deletedAt']);
+    $manager->persist($planet);
+}
+
+$manager->flush();
+ */
         echo "Planets created\n";
         $data = $this->loadData('character.json');
+
         foreach ($data as $value) {
             $character = new Character();
             $character->setName($value['name']);
             $character->setKi($value['ki']);
-            $character->setmaxKi($value['maxki']);
+            $character->setmaxKi($value['maxKi']);
             $character->setRace($value['race']);
             $character->setGender($value['gender']);
             $character->setDescription($value['description']);
             $character->setImage($value['image']);
             $character->setAffiliation($value['affiliation']);
-            $character->setDeletedAt($value['deletedAt']);
-            $idPlanet = $value['originPlanet']['id'];
-            $character->setPlanet($value['originPlanet']);
-            $character->setTransformation($value['transformations']);
+            $character->setDeletedAt($value['affiliation']);
+            /* $idPlanet = $value['originPlanet']['id'];
+             $character->setPlanet($idPlanet);
+             $character->setTransformation($value['transformations']);*/
             $manager->persist($character);
 
         }

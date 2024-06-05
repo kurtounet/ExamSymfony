@@ -23,18 +23,21 @@ class CallApiService
         );
         return $response->toArray();
     }
-    public function getCharacterData($i): array
+    public function getCharacterData($i): array|false
     {
         echo " Je suis dans la fonction getCharacterData";
-        try {
-            $response = $this->client->request(
-                'GET',
-                'https://dragonball-api.com/api/characters/' . $i
-            );
+
+        $response = $this->client->request(
+            'GET',
+            'https://dragonball-api.com/api/characters/' . $i
+        );
+        if ($response->getStatusCode() === 404) {
+            return false;
+        } else {
             return $response->toArray();
-        } catch (\Exception $e) {
-            return $e->getMessage();
         }
+
+
 
     }
 
