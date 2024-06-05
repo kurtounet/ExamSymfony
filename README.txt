@@ -1,3 +1,30 @@
+Projet examsymfony
+
+PUBLIC:
+-> page acceuil.
+-> page liste des cartes des personnage.
+-> page de détail pour chaque personnage quand on clique sur la page.
+-> page formulaire contact + envoyer email
+-> page inscription + contrainte de validation // user unique
+-> page login authentification JWT
+
+Entity:
+-> User
+-> Character
+-> Planet
+-> Transfomation
+
+ADMIN:
+-> Ajouter , modifier, supprimer user
+-> Ajouter , modifier, supprimer personnage
+
+FIXTURES:
+    charger la base de donnée a partir d'une api (https://web.dragonball-api.com/)
+    avec HTTPclient.
+
+Commande mise a jours api
+
+
 # Création du projet
 ```
 symfony new examsymfony --version=6.4 --webapp

@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Character;
+use App\Entity\Planet;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpClient\HttpClient;
@@ -9,39 +11,71 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class AppFixtures extends Fixture
 {
-
-    const Base_URL = 'https://www.dragonball-api.com/api';
-    const NB_CHARACTERS = 58;
-    const NB_PLANETS = 20;
-    const NB_TRANSFORMATIONS = 43;
-
-    public function __construct(
-        private HttpClientInterface $client,
-    ) {
-    }
-    public function fetchApiDBZ(): array
+    private function loadData($file)
     {
-        $response = $this->client->request(
-            'GET',
-            'https://api.github.com/repos/symfony/symfony-docs'
-        );
+        $filename = __DIR__ . '/' . $file;
+        echo $filename;
 
-        $statusCode = $response->getStatusCode();
-        // $statusCode = 200
-        $contentType = $response->getHeaders()['content-type'][0];
-        // $contentType = 'application/json'
-        $content = $response->getContent();
-        // $content = '{"id":521583, "name":"symfony-docs", ...}'
-        $content = $response->toArray();
-        // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
+        //echo $filename;
+        // Check if the file exists
+        if (!file_exists($filename)) {
+            echo "Erreur : le fichier n'existe pas.";
+            return null; // Return early to avoid further processing
+        }
 
-        return $content;
+        // Attempt to read the file contents
+        $fileContents = file_get_contents($filename);
+        if ($fileContents === false) {
+            echo "Erreur : impossible de lire le fichier.";
+            return null;
+        }
+
+        // Decode the JSON data
+        $data = json_decode($fileContents, true);
+        if ($data === null) {
+            echo "Erreur : échec du décodage JSON.";
+            return null;
+        }
+
+        return $data;
+
     }
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
+        $data = $this->loadData('planet.json');
+
+        foreach ($data as $value) {
+            $planet = new Planet();
+            $planet->setName($value['name']);
+            $planet->setDestroyed($value['isDestroyed']);
+            $planet->setDescription($value['description']);
+            $planet->setImage($value['image']);
+            $planet->setDeletedAt($value['deletedAt']);
+            $manager->persist($planet);
+        }
 
         $manager->flush();
+        echo "Planets created\n";
+        $data = $this->loadData('character.json');
+        foreach ($data as $value) {
+            $character = new Character();
+            $character->setName($value['name']);
+            $character->setKi($value['ki']);
+            $character->setmaxKi($value['maxki']);
+            $character->setRace($value['race']);
+            $character->setGender($value['gender']);
+            $character->setDescription($value['description']);
+            $character->setImage($value['image']);
+            $character->setAffiliation($value['affiliation']);
+            $character->setDeletedAt($value['deletedAt']);
+            $idPlanet = $value['originPlanet']['id'];
+            $character->setPlanet($value['originPlanet']);
+            $character->setTransformation($value['transformations']);
+            $manager->persist($character);
+
+        }
+        $manager->flush();
+        echo "Characters created\n";
+
     }
 }
