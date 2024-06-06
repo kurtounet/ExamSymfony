@@ -41,22 +41,22 @@ class AppFixtures extends Fixture
 
     }
     public function load(ObjectManager $manager): void
-    { /*
-$data = $this->loadData('planet.json');
+    {
+        $data = $this->loadData('planet.json');
 
-foreach ($data as $value) {
+        foreach ($data as $value) {
 
-    $planet = new Planet();
-    $planet->setName($value['name']);
-    $planet->setDestroyed($value['isDestroyed']);
-    $planet->setDescription($value['description']);
-    $planet->setImage($value['image']);
-    $planet->setDeletedAt($value['deletedAt']);
-    $manager->persist($planet);
-}
+            $planet = new Planet();
+            $planet->setName($value['name']);
+            $planet->setDestroyed($value['isDestroyed']);
+            $planet->setDescription($value['description']);
+            $planet->setImage($value['image']);
+            $planet->setDeletedAt($value['deletedAt']);
+            $manager->persist($planet);
+        }
 
-$manager->flush();
- */
+        $manager->flush();
+
         echo "Planets created\n";
         $data = $this->loadData('character.json');
 

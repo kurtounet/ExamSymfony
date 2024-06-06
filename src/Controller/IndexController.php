@@ -17,14 +17,7 @@ class IndexController extends AbstractController
 
     }
     //Controller de la page categories
-    #[Route('/heros', name: 'app_heros')]
-    public function heros(CharacterRepository $characterRepository): Response
-    {
-        $characters = $characterRepository->findAll();
-        return $this->render('heros/listheros.html.twig', [
-            'heros' => $characters,
-        ]);
-    }
+    
     #[Route('/contact', name: 'app_contact')]
     public function contact(): Response
     {

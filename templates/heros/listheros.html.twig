@@ -4,16 +4,13 @@
 {% endblock %}
 
 {% block body %}
-	<ul>
+	<div class="flex flex-wrap gap-1">
 		{% for hero in heros %}
-			<li>
-            
-				{{ hero.name }}
-				{{ chero.articles }}
-			</li>
+			<div>
+            {{ include('heros/card.html.twig', { hero: hero }) }}				 
+			</div>
 		{% else %}
-			<li>Aucune catégorie trouvée</li>
+			<div>Aucune héros n'a été trouvée</div>
 		{% endfor %}
-	</ul>
-
+	</div>
 {% endblock %}
