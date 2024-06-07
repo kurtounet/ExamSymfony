@@ -21,15 +21,10 @@ class HerosController extends AbstractController
     public function hero(CharacterRepository $characterRepository, int $id): Response
     {
         $hero = $characterRepository->find($id);
-        if (!$hero === null) {
-            return $this->render('heros/hero.html.twig', [
-                'hero' => $hero,
-            ]);
-        } else {
-            $message = "Ce personnage n'existe pas";
-            return $this->render('heros/hero.html.twig', [
-                'message' => $message,
-            ]);
-        }
+        return $this->render('heros/hero.html.twig', [
+            'hero' => $hero,
+        ]);
+
+
     }
 }

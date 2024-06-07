@@ -3,27 +3,24 @@
 {% block title %}Hello IndexController!{% endblock %}
 
 {% block body %}
- {% if hero %}
-    <div class="flex bg-gray-200 m-2 w-1/2" >
-    <img class="object-cover w-100 h-100 mx-auto " src="{{ hero.image }}" alt="{{ hero.name }}" 
+ {% if hero != null %}
+    <div class="flex justify-center bg-gray-200 m-2 " >
+    <img class="object-contain w-100 h-100 mx-auto " src="{{ hero.image }}" alt="{{ hero.name }}" 
     style="width: 300px; height: 500px;">
     <div class="m-4">
-        <p class="text-lg font-semibold">Nom : {{ hero.name }}</p>
-        <p class="text-lg font-semibold">Ki : {{ hero.ki }}</p>
-        <p class="text-lg font-semibold">Max KI : {{ hero.maxKi }}</p>
-        <p class="text-lg font-semibold">Race : {{ hero.race }}</p>
-        <p class="text-lg font-semibold">Genre : {{ hero.gender }}</p>
-        <p class="text-lg font-semibold">Description : {{ hero.description }}</p>
-        <p class="text-lg font-semibold">Affiliation : {{ hero.affiliation }}</p>
-        <p class="text-lg font-semibold">Supprimer dans : {{ hero.deletedAt }}</p>
+        <p class="text-lg font-semibold m-1">Nom : {{ hero.name }}</p>
+        <p class="text-lg font-semibold m-1">Ki : {{ hero.ki }}</p>
+        <p class="text-lg font-semibold m-1">Max KI : {{ hero.maxKi }}</p>
+        <p class="text-lg font-semibold m-1">Race : {{ hero.race }}</p>
+        <p class="text-lg font-semibold m-1">Genre : {{ hero.gender }}</p>
+        <p class="text-lg font-semibold m-1">Description : {{ hero.description }}</p>
+        <p class="text-lg font-semibold m-1">Affiliation : {{ hero.affiliation }}</p>
+        <p class="text-lg font-semibold m-1">Supprimer dans : {{ hero.deletedAt }}</p>
     </div>
 </div>
 {% else %}
-<div class="flex bg-gray-200 m-2 w-1/2" >
-     
-     
-        <p class="text-lg font-semibold">{{ message }}</p>
-        
+<div class="flex justify-center bg-gray-200 m-2" >
+        <p class="text-lg font-semibold">Ce personnage n'existe pas</p>        
 </div>
  {% endif %}
 
