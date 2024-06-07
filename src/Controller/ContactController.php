@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
 use App\Form\ContactType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,19 +18,21 @@ class ContactController extends AbstractController
         EntityManagerInterface $em
 
     ): Response {
-        $contact = new ContactType();
 
+        $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $contact->setcreatedAt(new \DateTime());
+
+
             $em->persist($contact);
             $em->flush();
+            $this->addFlash('success', 'Votre message a bien été envoyé !');
         }
 
-        return $this->render('contact/contact.html.twig', [
-            'contactForm' => $form
-        ]);
+        return $this->render('contact/index.html.twig', ['Contact_form' => $form]);
     }
 }
